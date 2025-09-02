@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fff5f5 0%, #fce4ec 100%);
+            color: #5a3d5c;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .resume-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(146, 83, 149, 0.15);
+        }
+        
+        /* Header Styles */
+        .header {
+            background: linear-gradient(120deg, #ffe5f1 0%, #ff63c3 100%);
+            padding: 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='%23ffffff' opacity='0.2' d='M96 95.24l-5.56-3.33-5.56 3.33v-6.67l-5.56-3.33 5.56-3.33v-6.67l5.56 3.33 5.56-3.33v6.67l5.56 3.33-5.56 3.33v6.67zM10 5l-5.56-3.33L0 5v6.67l-5.56 3.33 5.56 3.33v6.67l5.56-3.33L10 20v-6.67l5.56-3.33L10 6.67V0z'/%3E%3C/svg%3E");
+            opacity: 0.1;
+        }
+        
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .title {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 15px;
+        }
+        
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Main Content */
+        .resume-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            padding: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .resume-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .main-column, .side-column {
+            padding: 10px;
+        }
+        
+        h2 {
+            color: #e7a1cd;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f9c6df;
+            position: relative;
+        }
+        
+        h2::after {
+            content: "❀";
+            position: absolute;
+            right: 0;
+            bottom: -5px;
+            color: #d47daa;
+            font-size: 1.2rem;
+        }
+        
+        h3 {
+            color: #e7a1cd;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        
+        /* Objective Section */
+        .objective {
+            margin-bottom: 25px;
+            line-height: 1.8;
+            padding-left: 20px;
+            border-left: 3px solid #f9c6df;
+        }
+        
+        /* Experience Section */
+        .experience {
+            margin-bottom: 25px;
+            padding-left: 20px;
+            border-left: 3px solid #f9c6df;
+        }
+        
+        .date {
+            color: #e7a1cd;
+            font-style: italic;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .experience ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .experience li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .experience li::before {
+            content: "♥";
+            color: #ff9bc9;
+            margin-right: 8px;
+            font-size: 0.8rem;
+        }
+        
+        /* Education Section */
+        .education {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 3px solid #f9c6df;
+        }
+        
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        @media (max-width: 480px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .skill-category {
+            margin-bottom: 15px;
+        }
+        
+        .skill-category h4 {
+            color: #e7a1cd;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .skill-list {
+            list-style-type: none;
+        }
+        
+        .skill-list li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .skill-list li::before {
+            content: "•";
+            color: #ff9bc9;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Additional Info */
+        .additional-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .info-item {
+            margin-bottom: 10px;
+        }
+        
+        .info-item strong {
+            color: #e7a1cd;
+            margin-right: 5px;
+        }
+        
+        /* Certificates */
+        .certificate {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .certificate::before {
+            content: "🏆";
+            position: absolute;
+            left: 0;
+        }
+        
+        /* References */
+        .references {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            .references {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .reference {
+            background: #fdf5f8;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #ff9bc9;
+        }
+        
+        .reference h4 {
+            color: #e7a1cd;
+            margin-bottom: 5px;
+        }
+        
+        /* Interests */
+        .interests {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .interest {
+            background: linear-gradient(135deg, #ffd1dc 0%, #e6c6ff 100%);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #ffffff;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Decorative elements */
+        .floral-divider {
+            text-align: center;
+            color: #d47daa;
+            font-size: 1.5rem;
+            margin: 10px 0;
+            letter-spacing: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #bb8fc5;
+            font-size: 0.9rem;
+            background: #fdf5f8;
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <header class="header">
+            <img src="jeans.jpg" alt="Profile Photo" class="profile-img">
+            <h1>Princes Jean Manuel</h1>
+            <p class="title">Graphic Designer & Video Editor</p>
+            <div class="contact-info">
+                <div><i class="fas fa-map-marker-alt"></i> Malabon City, Metro Manila, Philippines</div>
+                <div><i class="fas fa-phone"></i> (+63) 9385658475 </div>
+                <div><i class="fas fa-envelope"></i> jeamnl18@gmail.com</div>
+            </div>
+        </header>
+        
+        <div class="resume-content">
+            <div class="main-column">
+                <section>
+                    <h2><i class="fas fa-user"></i> Career Objective</h2>
+                    <div class="objective">
+                        <p> To commit a professional job, seek out chances that will help me grow professionally, while effectively utilizing my flexible skill set and developing my humble knowledge to expand my understanding of the field I have chosen.
+</p>
+                    </div>
+                </section>
+                
+                <div class="floral-divider">✽ ✽ ✽</div>
+                
+                <section>
+                    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                    <div class="education">
+                        <h3>College</h3>
+                        <h4>Bachelor of Science in Information Technology</h4>
+                        <span class="date">2028-2029</span>
+                        <p><strong>Global Reciprocal Colleges</strong> - Rizal Ave. Cor. 9th ave. East Grace Park, Caloocan City</p>
+                        <p>Specialization: Graphic Design and Video Editing</p>
+                    </div>
+                </section>
+                
+                <div class="floral-divider">✽ ✽ ✽</div>
+                
+                <section>
+                    <h2><i class="fas fa-certificate"></i> Certificates & Awards</h2>
+                    <div class="certificate">
+                        <h3>Best Film Editing</h3>
+                        <span class="date">2025</span>
+                    </div>
+                    
+                    <div class="certificate">
+                        <h3>Design Excellence Award</h3>
+                        <span class="date">2025</span>
+                    </div>
+                    
+                    <div class="certificate">
+                        <h3>Best Graphic Design</h3>
+                        <span class="date">2026</span>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="side-column">
+                <section>
+                    <h2><i class="fas fa-star"></i> IT Skills</h2>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4>Design Tools</h4>
+                            <ul class="skill-list">
+                                <li>Figma</li>
+                                <li>Adobe XD</li>
+                                <li>Illustrator</li>
+                                <li>Photoshop</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <h4>Frontend Development</h4>
+                            <ul class="skill-list">
+                                <li>HTML/CSS</li>
+                                <li>JavaScript</li>
+                                <li>Bootstrap</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <h4>UX/UI Design</h4>
+                            <ul class="skill-list">
+                                <li>Prototyping</li>
+                                <li>User Research</li>
+                                <li>Interaction Design</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <h4>Other Skills</h4>
+                            <ul class="skill-list">
+                                <li>Project Management</li>
+                                <li>Photo editing</li>
+                                <li>Video editing</li>
+                                <li>Design Thinking</li>
+                                <li>Creativity</li>
+                                <li>Communication</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                
+                <div class="floral-divider">✽ ✽ ✽</div>
+                
+                <section>
+                    <h2><i class="fas fa-info-circle"></i> Additional Information</h2>
+                    <div class="additional-info">
+                        <div class="info-item"><strong>Birthday:</strong> October 17, 2006</div>
+                        <div class="info-item"><strong>Age:</strong> 24 years old</div>
+                        <div class="info-item"><strong>Religion:</strong> Catholic</div>
+                        <div class="info-item"><strong>Height:</strong> 4'10</div>
+                        <div class="info-item"><strong>Weight:</strong> 45 kg</div>
+                        <div class="info-item"><strong>Nickname:</strong> Jean</div>
+                        <div class="info-item"><strong>Nationality:</strong> Filipino</div>
+                        <div class="info-item"><strong>Languages:</strong> Filipino, English</div>
+                    </div>
+                </section>
+                
+                <div class="floral-divider">✽ ✽ ✽</div>
+                
+                <section>
+                    <h2><i class="fas fa-heart"></i> Interests</h2>
+                    <div class="interests">
+                        <span class="interest">Video Editing</span>
+                        <span class="interest">Photography</span>
+                        <span class="interest">Travel</span>
+                        <span class="interest">Yoga</span>
+                        <span class="interest">Reading</span>
+                        <span class="interest">Fashion</span>
+                    </div>
+                </section>
+                
+                <div class="floral-divider">✽ ✽ ✽</div>
+                
+                <section>
+                    <h2><i class="fas fa-users"></i> Character References</h2>
+                    <div class="references">
+                        <div class="reference">
+                            <h4>Ms. Maybelle Sapitan</h4>
+                            <p>Design Director, Creative Solutions Inc.</p>
+                            <p>(+63) 9486617602</p>
+                        </div>
+                        
+                        <div class="reference">
+                            <h4>Mr. Rogene S. Rizare</h4>
+                            <p>English Teacher</p>
+                            <p>(+63) 9665262387</p>
+                        </div>
+                        
+                        <div class="reference">
+                            <h4>Mr. Michael Macinas</h4>
+                            <p>IT Professor, Global Reciprocal Colleges</p>
+                        </div>
+
+                        <div class="reference">
+                            <h4>Mr. Miguel Bautista</h4>
+                            <p>IT Professor, Global Reciprocal Colleges</p>
+                        </div>
+                    </div>
+                </section?
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 Jean Manuel| Resume | Designed with ❤</p>
+        </footer>
+    </div>
+</body>
+</html>
